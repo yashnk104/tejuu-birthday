@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Our song</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12%2021s-7.5-4.6-9.6-9.2C.9%208.4%203%205%206.4%205c2%200%203.6%201.1%204.6%202.7C12%206.1%2013.6%205%2015.6%205%2019%205%2021.1%208.4%2019.6%2011.8%2017.5%2016.4%2012%2021%2012%2021z' fill='%23E8668A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Gaegu:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+
+<a class="back" href="items.html"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="#5B3FA8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Back</a>
+<div class="player" id="player">
+  <div class="screen">
+    <svg class="record" aria-hidden="true" width="110" height="110" viewBox="0 0 110 110"><circle cx="55" cy="55" r="52" fill="#1F1A2E"/><circle cx="55" cy="55" r="40" stroke="#3B3355" stroke-width="2" fill="none"/><circle cx="55" cy="55" r="18" fill="#F2A0B5"/><circle cx="55" cy="55" r="4" fill="#1F1A2E"/></svg>
+    <p>Every time it plays, I think of you 🎶</p>
+  </div>
+  <div class="track"><b>Tum Mere Ho</b><small>The song that's ours 💕</small></div>
+  <div class="bar" id="bar"><div id="fillbar"></div></div>
+  <div class="times"><span id="cur">0:00</span><span id="dur">0:00</span></div>
+  <div class="controls">
+    <button class="icon-btn" type="button" id="like" aria-label="Like" aria-pressed="false"><svg class="heart-i" aria-hidden="true" width="26" height="26" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 5 6.4 5c2 0 3.6 1.1 4.6 2.7C12 6.1 13.6 5 15.6 5 19 5 21.1 8.4 19.6 11.8 17.5 16.4 12 21 12 21z" fill="none" stroke="#E8668A" stroke-width="2"/></svg></button>
+    <button class="play" type="button" id="play" aria-label="Play">
+      <svg class="play-i" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><path d="M7 4l13 8-13 8z" fill="#fff"/></svg>
+      <svg class="pause-i" aria-hidden="true" width="24" height="24" viewBox="0 0 24 24"><rect x="5" y="4" width="5" height="16" rx="1.5" fill="#fff"/><rect x="14" y="4" width="5" height="16" rx="1.5" fill="#fff"/></svg>
+    </button>
+    <span style="width:48px"></span>
+  </div>
+  <p class="msg hidden" id="nosong" style="text-align:center">Add your song as assets/song.mp3</p>
+  <audio id="audio" src="assets/song.mp3" preload="metadata"></audio>
+</div>
+</main>
+<script src="js/main.js"></script>
+<script>
+(function () {
+  var audio = document.getElementById('audio');
+  var player = document.getElementById('player');
+  var play = document.getElementById('play');
+  var fill = document.getElementById('fillbar');
+  function t(s) { s = Math.floor(s || 0); return Math.floor(s / 60) + ':' + ('0' + s % 60).slice(-2); }
+  play.onclick = function () {
+    if (audio.paused) { audio.play().catch(function () { document.getElementById('nosong').classList.remove('hidden'); }); }
+    else audio.pause();
+  };
+  audio.onplay = function () { player.classList.add('playing'); play.setAttribute('aria-label', 'Pause'); };
+  audio.onpause = function () { player.classList.remove('playing'); play.setAttribute('aria-label', 'Play'); };
+  audio.onerror = function () { document.getElementById('nosong').classList.remove('hidden'); };
+  audio.onloadedmetadata = function () { document.getElementById('dur').textContent = t(audio.duration); };
+  audio.ontimeupdate = function () {
+    document.getElementById('cur').textContent = t(audio.currentTime);
+    if (audio.duration) fill.style.width = (audio.currentTime / audio.duration * 100) + '%';
+  };
+  document.getElementById('bar').onclick = function (e) {
+    if (!audio.duration) return;
+    var r = this.getBoundingClientRect();
+    audio.currentTime = (e.clientX - r.left) / r.width * audio.duration;
+  };
+  var like = document.getElementById('like');
+  like.onclick = function () {
+    var on = player.classList.toggle('liked');
+    like.setAttribute('aria-pressed', on); like.setAttribute('aria-label', on ? 'Unlike' : 'Like');
+  };
+})();
+</script>
+</body>
+</html>

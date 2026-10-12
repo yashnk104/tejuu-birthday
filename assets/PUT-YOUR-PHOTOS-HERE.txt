@@ -1,0 +1,15 @@
+Drop your files in this folder with exactly these names
+(lowercase, .jpg). Any photo you skip shows a dashed placeholder instead.
+
+tejuu.jpg       her photo inside the heart (page 3)
+childhood.jpg   her childhood photo in the camera (Happy Birthday page)
+memory1.jpg     \
+memory2.jpg      |
+memory3.jpg      |  the 6 photos on the Memories page
+memory4.jpg      |
+memory5.jpg      |
+memory6.jpg     /
+song.mp3        your song for the music player
+
+Photos that are .png or .jpeg: either rename them to .jpg,
+or change the name in the matching .html file.

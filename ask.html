@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I made something for you</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12%2021s-7.5-4.6-9.6-9.2C.9%208.4%203%205%206.4%205c2%200%203.6%201.1%204.6%202.7C12%206.1%2013.6%205%2015.6%205%2019%205%2021.1%208.4%2019.6%2011.8%2017.5%2016.4%2012%2021%2012%2021z' fill='%23E8668A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@400;800&family=Gaegu:wght@400;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main>
+
+<div id="asking" style="display:flex;flex-direction:column;align-items:center;gap:24px">
+  <h1>Hey Tejuu! I made something for you<br>do you wanna see it?</h1>
+  <div class="bob" aria-hidden="true"><svg aria-hidden="true" width="200" height="200" viewBox="0 0 200 200">
+  <rect x="34" y="86" width="132" height="98" rx="10" fill="#F2A0B5"></rect>
+  <rect x="26" y="66" width="148" height="32" rx="8" fill="#E8668A"></rect>
+  <rect x="90" y="66" width="20" height="118" fill="#F2C94C"></rect>
+  <path d="M100 66 C70 30 44 46 60 62 C70 72 92 68 100 66z" fill="#F2C94C"></path>
+  <path d="M100 66 C130 30 156 46 140 62 C130 72 108 68 100 66z" fill="#F2C94C"></path>
+  <circle cx="100" cy="64" r="9" fill="#E3B23C"></circle>
+  <path d="M60 130 C54 124 50 136 60 134 C70 136 66 124 60 130z" fill="#FFFFFF"></path>
+  <path d="M140 150 C134 144 130 156 140 154 C150 156 146 144 140 150z" fill="#FFFFFF"></path>
+</svg></div>
+  <div class="row" style="gap:24px">
+    <a class="pill" href="good.html" style="min-width:140px">Yes</a>
+    <button class="pill light" type="button" id="no" style="min-width:140px">No</button>
+  </div>
+</div>
+<div id="saidno" class="hidden popin" style="display:flex;flex-direction:column;align-items:center;gap:28px">
+  <h1>SERIOUSLY?! How could you</h1>
+  <p style="font-size:18px">Wrong answer. Let's try that again.</p>
+  <button class="pill" type="button" id="goback">Go back</button>
+</div>
+</main>
+<script src="js/main.js"></script>
+<script>
+document.getElementById('no').onclick = function () {
+  document.getElementById('asking').classList.add('hidden');
+  document.getElementById('saidno').classList.remove('hidden');
+};
+document.getElementById('goback').onclick = function () {
+  document.getElementById('saidno').classList.add('hidden');
+  document.getElementById('asking').classList.remove('hidden');
+};
+</script>
+</body>
+</html>
